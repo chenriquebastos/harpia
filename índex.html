@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harp.IA - Inovação em Segurança, Sempre Ativa</title>
+    <meta name="description" content="Monitoramento inteligente, prevenção de riscos e resposta imediata com a tecnologia da Harp.IA. Soluções de segurança com IA para empresas, condomínios e cidades.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #BDFB05;
+            --color-black: #000000;
+            --color-white: #FFFFFF;
+            --color-gray: #898989;
+            --color-bg: #121212;
+            --color-bg-light: #1a1a1a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: var(--color-primary);
+        }
+
+        .btn {
+            background: var(--color-primary);
+            color: var(--color-black);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: rgba(189, 251, 5, 0.9);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 5rem;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #0a4d4d 0%, #121212 50%, #1a1a1a 100%);
+            z-index: -1;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(189, 251, 5, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(189, 251, 5, 0.05) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--color-primary), #d4ff4d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            color: var(--color-gray);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, 10px); }
+        }
+
+        .scroll-indicator div {
+            width: 24px;
+            height: 40px;
+            border: 2px solid rgba(189, 251, 5, 0.5);
+            border-radius: 20px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 8px;
+        }
+
+        .scroll-indicator span {
+            width: 6px;
+            height: 6px;
+            background: var(--color-primary);
+            border-radius: 50%;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--color-gray);
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 1.25rem;
+            color: var(--color-gray);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(189, 251, 5, 0.1), rgba(189, 251, 5, 0.05));
+            border: 2px solid rgba(189, 251, 5, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .highlight-box h3 {
+            color: var(--color-primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(189, 251, 5, 0.1), rgba(189, 251, 5, 0.05));
+            border: 2px solid rgba(189, 251, 5, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(189, 251, 5, 0.4);
+            box-shadow: 0 0 30px rgba(189, 251, 5, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(189, 251, 5, 0.2);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s ease;
+        }
+
+        .feature-card:hover h3 {
+            color: var(--color-primary);
+        }
+
+        .feature-card p {
+            color: var(--color-gray);
+            line-height: 1.6;
+        }
+
+        .epi-badge {
+            display: inline-block;
+            background: rgba(189, 251, 5, 0.1);
+            border: 1px solid rgba(189, 251, 5, 0.3);
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            margin-top: 3rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        /* Segments Grid */
+        .segments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .segment-card {
+            background: var(--color-bg-light);
+            border: 2px solid rgba(189, 251, 5, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .segment-card:hover {
+            border-color: rgba(189, 251, 5, 0.4);
+            box-shadow: 0 0 30px rgba(189, 251, 5, 0.15);
+        }
+
+        .segment-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(189, 251, 5, 0.2);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .segment-card:hover .segment-icon {
+            transform: scale(1.1);
+        }
+
+        .segment-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s ease;
+        }
+
+        .segment-card:hover h3 {
+            color: var(--color-primary);
+        }
+
+        .segment-content p {
+            color: var(--color-gray);
+        }
+
+        /* Differentials */
+        .differentials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .differential-card {
+            background: rgba(189, 251, 5, 0.1);
+            border: 1px solid rgba(189, 251, 5, 0.3);
+            border-radius: 0.75rem;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .differential-card:hover {
+            background: rgba(189, 251, 5, 0.2);
+            transform: scale(1.05);
+        }
+
+        .differential-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(189, 251, 5, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+        }
+
+        .differential-card h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .differential-card p {
+            font-size: 0.875rem;
+            color: var(--color-gray);
+        }
+
+        .integration-badge {
+            display: inline-block;
+            background: var(--color-bg-light);
+            border: 2px solid rgba(189, 251, 5, 0.3);
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(to bottom, var(--color-bg), rgba(189, 251, 5, 0.05));
+        }
+
+        .contact-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+        }
+
+        .contact-subtitle {
+            font-size: clamp(1.25rem, 2vw, 2rem);
+            color: var(--color-gray);
+            margin-bottom: 3rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-card {
+            background: var(--color-bg-light);
+            border: 2px solid rgba(189, 251, 5, 0.3);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .contact-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 30px rgba(189, 251, 5, 0.3);
+        }
+
+        .contact-card-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--color-primary);
+        }
+
+        .contact-card h3 {
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card:hover h3 {
+            color: var(--color-primary);
+        }
+
+        .contact-card p {
+            color: var(--color-gray);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            color: var(--color-gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .segments-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .segment-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .segment-icon {
+                margin: 0 auto;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Icons usando emojis/unicode */
+        .icon-cloud::before { content: "☁️"; }
+        .icon-eye::before { content: "👁️"; }
+        .icon-car::before { content: "🚗"; }
+        .icon-shield::before { content: "🛡️"; }
+        .icon-fire::before { content: "🔥"; }
+        .icon-bell::before { content: "🔔"; }
+        .icon-building::before { content: "🏛️"; }
+        .icon-home::before { content: "🏢"; }
+        .icon-factory::before { content: "🏭"; }
+        .icon-calendar::before { content: "📅"; }
+        .icon-check::before { content: "✓"; }
+        .icon-phone::before { content: "📱"; }
+        .icon-headset::before { content: "🎧"; }
+        .icon-server::before { content: "🖥️"; }
+        .icon-globe::before { content: "🌐"; }
+        .icon-mail::before { content: "✉️"; }
+        .icon-arrow::before { content: "→"; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#home" class="logo">HARP.IA</a>
+                <nav>
+                    <a onclick="scrollToSection('about')">Quem Somos</a>
+                    <a onclick="scrollToSection('features')">Funcionalidades</a>
+                    <a onclick="scrollToSection('segments')">Para Quem</a>
+                    <a onclick="scrollToSection('differentials')">Diferenciais</a>
+                    <button class="btn" onclick="scrollToSection('contact')">Contato</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1>
+                Inovação em Segurança, 
+                <span class="text-gradient">Sempre Ativa</span>
+            </h1>
+            <p>
+                Monitoramento inteligente, prevenção de riscos e resposta imediata 
+                com a tecnologia da Harp.IA
+            </p>
+            <button class="btn" onclick="scrollToSection('contact')">
+                Conheça a Solução
+                <span class="icon-arrow"></span>
+            </button>
+        </div>
+        <div class="scroll-indicator">
+            <div><span></span></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">
+                Quem <span class="text-gradient">Somos</span>
+            </h2>
+            <div class="about-content">
+                <p class="about-text">
+                    A <strong style="color: var(--color-primary);">Harp.IA</strong> é especialista em soluções 
+                    de segurança integrada, entregando sistemas que previnem riscos e monitoram ambientes em tempo real.
+                </p>
+                <p class="about-text">
+                    Nossa missão é transformar a segurança em uma experiência eficiente e transparente, 
+                    criando parcerias duradouras com nossos clientes.
+                </p>
+                <div class="highlight-box">
+                    <h3>Harp.IA</h3>
+                    <p style="font-size: 1.125rem;">
+                        Um sistema que integra múltiplas tecnologias para proteger o que realmente importa, 
+                        oferecendo monitoramento preciso, respostas rápidas e total acessibilidade via aplicativo ou computador.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title">
+                Funcionalidades <span class="text-gradient">Avançadas</span>
+            </h2>
+            <p class="section-subtitle">
+                Tecnologia de ponta para monitoramento e segurança completa
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon icon-cloud"></div>
+                    <h3>Gravação em Nuvem</h3>
+                    <p>1 a 366 dias, com acesso remoto seguro</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon icon-eye"></div>
+                    <h3>Reconhecimento e Detecção de Faces</h3>
+                    <p>Identificação e busca facial em segundos</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon icon-car"></div>
+                    <h3>Leitura de Placas Veiculares</h3>
+                    <p>Alertas de irregularidades e rastreamento</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon icon-shield"></div>
+                    <h3>Detecção e Movimentação</h3>
+                    <p>Detecção de objetos, armas, quedas, invasões</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon icon-fire"></div>
+                    <h3>Detecção de Fogo e Fumaça</h3>
+                    <p>Resposta imediata a emergências</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon icon-bell"></div>
+                    <h3>Alarmes Inteligentes</h3>
+                    <p>Integração com sirenes e giroflex</p>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <div class="epi-badge">
+                    + Detecção de Uso de EPIs para segurança no trabalho
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Segments Section -->
+    <section id="segments" style="background: linear-gradient(to bottom, rgba(189, 251, 5, 0.05), var(--color-bg));">
+        <div class="container">
+            <h2 class="section-title">
+                Segurança <span class="text-gradient">Inteligente</span>
+            </h2>
+            <p class="section-subtitle">
+                Cada cliente tem necessidades únicas para cada cenário e Harp.IA é projetada para se adaptar
+            </p>
+
+            <div class="segments-grid">
+                <div class="segment-card">
+                    <div class="segment-icon icon-building"></div>
+                    <div class="segment-content">
+                        <h3>Prefeituras e Segurança Pública</h3>
+                        <p>Monitoramento de vias, praças e prédios públicos</p>
+                    </div>
+                </div>
+
+                <div class="segment-card">
+                    <div class="segment-icon icon-home"></div>
+                    <div class="segment-content">
+                        <h3>Condomínios e Espaços Privados</h3>
+                        <p>Prevenção de riscos e resposta a incidentes</p>
+                    </div>
+                </div>
+
+                <div class="segment-card">
+                    <div class="segment-icon icon-factory"></div>
+                    <div class="segment-content">
+                        <h3>Empresas e Indústrias</h3>
+                        <p>Segurança patrimonial, controle de acesso e gestão de EPIs</p>
+                    </div>
+                </div>
+
+                <div class="segment-card">
+                    <div class="segment-icon icon-calendar"></div>
+                    <div class="segment-content">
+                        <h3>Eventos e Áreas Temporárias</h3>
+                        <p>Monitoramento escalável e de fácil implementação</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Differentials Section -->
+    <section id="differentials">
+        <div class="container">
+            <h2 class="section-title">
+                Mais do que segurança, <span class="text-gradient">uma parceria de confiança</span>
+            </h2>
+
+            <div class="differentials-grid">
+                <div class="differential-card">
+                    <div class="differential-icon icon-check"></div>
+                    <h3>Ética na Proteção</h3>
+                    <p>Uso responsável, respeitando privacidade</p>
+                </div>
+
+                <div class="differential-card">
+                    <div class="differential-icon icon-phone"></div>
+                    <h3>Monitoramento Flexível</h3>
+                    <p>App e portal web para acesso rápido</p>
+                </div>
+
+                <div class="differential-card">
+                    <div class="differential-icon icon-headset"></div>
+                    <h3>Suporte Especializado</h3>
+                    <p>Equipe técnica preparada para cada cliente</p>
+                </div>
+
+                <div class="differential-card">
+                    <div class="differential-icon icon-server"></div>
+                    <h3>Alta Confiabilidade</h3>
+                    <p>Infraestrutura em datacenter seguro e escalável</p>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <div class="integration-badge">
+                    Integração com Órgãos de Segurança – Convênios oficiais
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2>
+                    Vamos <span class="text-gradient">Começar?</span>
+                </h2>
+                <p class="contact-subtitle">
+                    Conheça o Harp.IA aplicado à sua realidade
+                </p>
+
+                <div class="contact-grid">
+                    <a href="https://www.harp.ia.br" target="_blank" rel="noopener noreferrer" class="contact-card">
+                        <div class="contact-card-content">
+                            <span class="contact-icon icon-globe"></span>
+                            <h3>www.harp.ia.br</h3>
+                        </div>
+                        <p>Visite nosso website</p>
+                    </a>
+
+                    <a href="mailto:contato@harp.ia.br" class="contact-card">
+                        <div class="contact-card-content">
+                            <span class="contact-icon icon-mail"></span>
+                            <h3>contato@harp.ia.br</h3>
+                        </div>
+                        <p>Envie um email</p>
+                    </a>
+                </div>
+
+                <a href="mailto:contato@harp.ia.br" class="btn" style="font-size: 1.25rem; padding: 1.5rem 2.5rem;">
+                    Entre em Contato
+                    <span class="icon-arrow"></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo">HARP.IA</span>
+                    <span class="footer-text">
+                        © 2024 Harp.IA. Todos os direitos reservados.
+                    </span>
+                </div>
+                <p class="footer-text">
+                    Inovação em Segurança, Sempre Ativa
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll function
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                const offset = 80;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Fade in on scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.feature-card, .segment-card, .differential-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
